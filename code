@@ -1,0 +1,948 @@
+
+#include "Nextion.h"
+// LED pins
+const int button= 7;
+const int led1 = 8;
+const int led2 = 9;
+char input;
+int pin;
+int count1=0;
+
+char a[30];
+int val1[30];
+//int a;
+char b[30];
+int val2[30];
+char c[30];
+int val3[30];
+char d[30];
+int val4[30];
+int tot[30];
+char productSantoo;
+int Biscuit=0;
+int BiscuitCost=0;
+int Rin=0;
+int rinCost=0;
+int santo=0;
+int santoCost=0;
+int colgateCost=0;
+int tooth=0;
+int colgate=500;
+int glucose=600;
+int count = 0;
+
+int buttonState=0;
+int buttonSt2=0;
+int Total;
+int total=0;
+int totalWeight;
+String product ; 
+
+int v1,v2;
+
+
+// Declare your Nextion objects - Example (page id = 0, component id = 1, component name = "b0") 
+NexText t1 = NexText(1, 3, "t1"); 
+NexNumber n0 = NexNumber(1, 6, "n0");
+NexNumber n1 = NexNumber(1, 7, "n1");
+//NexButton b1 = NexButton(1, 9, "b1");
+NexButton start = NexButton(0, 2, "start");
+NexText t3 = NexText(2, 5, "t3");
+NexText t4 = NexText(2, 7, "t4");
+NexText t5 = NexText(2, 9, "t5");
+NexText t6 = NexText(2, 10, "t6");
+NexText t7 = NexText(2, 11, "t7");
+NexText t8 = NexText(2, 12, "t8");
+NexText t9 = NexText(3, 17, "t9");
+NexCheckbox c0 = NexCheckbox(5,1,"c0");
+NexCheckbox c1 = NexCheckbox(5,2,"c1");
+NexCheckbox c2 = NexCheckbox(5,3,"c2");
+NexCheckbox c3 = NexCheckbox(5,4,"c3");
+NexCheckbox c4 = NexCheckbox(5,5,"c4");
+
+//NexText t3 = NexText(3, 5, "t3");
+//NexText t4 = NexText(3, 7, "t4");
+//NexText t5 = NexText(3, 9, "t5");
+//NexText t6 = NexText(3, 10, "t6");
+//NexText t7 = NexText(3, 11, "t7");
+//NexText t8 = NexText(3, 12, "t8");
+//NexText t9 = NexText(3, 17, "t9");
+NexNumber n7 = NexNumber(2, 18, "n7");
+NexNumber n8 = NexNumber(2, 19, "n8");
+NexNumber n9 = NexNumber(2, 20, "n9");
+NexNumber n10 = NexNumber(2, 21, "n10");
+//NexNumber n11 = NexNumber(2, 22, "n11");
+//NexNumber n12 = NexNumber(2, 23, "n12");
+//NexNumber n13 = NexNumber(2, 24, "n13");
+//NexButton b0 = NexButton(2, 27, "b0");
+//NexButton b1 = NexButton(2, 28, "b1");
+//NexButton b2 = NexButton(2, 29, "b2");
+//NexNumber n7 = NexNumber(3, 18, "n7");
+//NexNumber n8 = NexNumber(3, 19, "n8");
+//NexNumber n9 = NexNumber(3, 20, "n9");
+//NexNumber n10 = NexNumber(3, 21, "n10");
+//NexNumber n11 = NexNumber(3, 22, "n11");
+//NexNumber n12 = NexNumber(3, 23, "n12");
+NexNumber n14 = NexNumber(2, 25, "n14");
+//NexButton b0 = NexButton(3, 27, "b0");
+//NexButton b1 = NexButton(3, 28, "b1");
+//NexButton b2 = NexButton(3, 29, "b2");
+
+
+
+// Register a button object to the touch event list.  
+NexTouch *nex_listen_list[] = {
+//  &t0,
+  &t1,
+//  &t2,
+  &t3,
+  &t4,
+  &t5,
+  &t6,
+  &t7,
+  &t8,
+  &t9,
+  &n0,
+  &n1,
+  &c0,
+  &c1,
+  &c2,
+  &c3,
+  &c4,
+
+//  &n7,
+//  &n8,
+//  &n9,
+//  &n10,
+//  &n11,
+//  &n12,
+    &n14,
+  //&b0,
+  &start,
+//    &b1,
+//  &b2,
+  NULL
+};
+ 
+/*
+ * Button bOn component pop callback function. 
+ * When the ON button is released, the LED turns on and the state text changes. 
+ */
+void b1PopCallback(void *ptr) {
+t3.setText("Santoor");
+t4.setText(a[1]);
+t5.setText(a[2]);
+t6.setText(a[3]);
+ delay(800);
+ 
+  //digitalWrite(led1, HIGH);
+}
+void Rfid(){
+  // Serial.println();
+   //delay(1000);
+  //pin= digitalRead(7);
+  if(count1==0){
+  if(Serial.available()) 
+{
+ product = "";
+ count = 0; 
+
+ while(Serial.available() && count<=12)
+{
+ input = Serial.read();
+ Serial.print(input); 
+ product += input;
+ count++; 
+ delay(50);
+}
+
+
+
+if (product=="2B001589DA6D")
+{
+ productSantoo=="2B001589DA6D";
+ santo=125;
+ count1=1;
+
+ santoCost=26;
+ a[0]="Santoor";
+ val1[0]=santo;
+ 
+ //Serial.println(" ");
+
+//Serial.print(santo);
+//t1.setText("Santoor");
+//n0.setValue(santoCost);
+t3.setText("Santoor");
+n7.setValue(santoCost);
+
+
+
+// 
+ 
+// lcd.clear();
+// 
+//
+v1++;
+totalWeight=santo+tooth+Biscuit+Rin;
+Total=santoCost+colgateCost+BiscuitCost+rinCost;
+
+ Serial.println(totalWeight);
+ Serial.println(Total);
+// n1.setValue(Total);
+ //delay(500);
+ n14.setValue(Total);
+ //tot=Total;
+
+//
+}
+//
+
+
+//
+if (product=="2B001585912A")
+{
+ tooth=175;
+ colgateCost=46;
+ count1=1;
+ b[0]="RIN";
+ Serial.println(" ");
+ Serial.println(" RIN ");
+
+ Serial.print(tooth);
+
+
+t3.setText("RIN");
+n7.setValue(colgateCost);
+//val2=colgateCost;
+
+
+
+ Serial.println(" ");
+
+//
+v2++;
+totalWeight=santo+tooth+Biscuit+Rin;
+Total=santoCost+colgateCost+BiscuitCost+rinCost;
+
+//
+  Serial.println(totalWeight);
+  Serial.println(Total);
+  //n1.setValue(Total);
+  n14.setValue(Total);
+  //tot=Total;
+  delay(800);
+//  
+}
+
+
+if (product=="2B00157394D9")
+{
+ Biscuit=150;
+  BiscuitCost=20;
+  count1=1;
+ Serial.println(" ");
+ Serial.println(" 50-50 Biscuit ");
+
+ Serial.println(" ");
+//
+t3.setText("50-50");
+//n0.setValue(BiscuitCost);
+//t5.setText("50-50");
+n7.setValue(BiscuitCost);
+v2++;
+totalWeight=santo+tooth+Biscuit+Rin;
+Total=santoCost+colgateCost+BiscuitCost+rinCost;
+
+//
+
+  Serial.println(totalWeight);
+  Serial.println(Total);
+  //n1.setValue(Total);
+  n14.setValue(Total);
+  delay(800);
+  }
+  if (product=="2B00155CFE9C")
+{
+ //productSantoo=="2B0015711D52";
+ 
+c0.Set_font_color_pco(63488);
+delay(500);
+c1.Set_font_color_pco(65535);
+delay(500);
+c2.Set_font_color_pco(65535);
+delay(500);
+  }
+  if (product=="2B0015711D52")
+{
+// productSantoo=="2B00157A2662";
+// 
+c1.Set_font_color_pco(63488);
+delay(500);
+c0.Set_font_color_pco(65535);
+delay(500);
+c2.Set_font_color_pco(65535);
+delay(500);
+
+  }
+  if (product=="2B00157A2662")
+{
+// productSantoo=="2B00157A2662";
+// 
+c2.Set_font_color_pco(63488);
+delay(500);
+c1.Set_font_color_pco(65535);
+delay(500);
+c0.Set_font_color_pco(65535);
+delay(500);
+
+  }
+//  if (product=="2B001589DA6D")
+//{
+//// productSantoo=="2B00157A2662";
+//// 
+//c2.Set_background_color_bco(63488);
+//delay(500);
+//c2.Set_background_color_bco(65535);
+//delay(500);
+//c1.Set_background_color_bco(65535);
+//delay(500);
+
+  }
+//  if (product=="2B0015711D52")
+//{
+//// productSantoo=="2B001585912A";
+//// 
+//c4.Set_background_color_bco(63488);
+//delay(500);
+//c3.Set_background_color_bco(65535);
+//delay(500);
+//
+//  }
+ 
+
+
+if (product=="2B001587C178")
+{
+  Rin=175;
+  rinCost=80;
+  count1=1;
+Serial.println(" ");
+Serial.println(" Dairy milk ");
+
+ Serial.print(Rin);
+//t1.setText("Silk");
+//n0.setValue(rinCost);
+t3.setText("Silk");
+n7.setValue(rinCost);
+
+ Serial.println(" ");
+ 
+//
+v2++;
+totalWeight=santo+tooth+Biscuit+Rin;
+Total=santoCost+colgateCost+BiscuitCost+rinCost;
+
+  Serial.println(totalWeight);
+  Serial.println(Total);
+ // n1.setValue(Total);
+  n14.setValue(Total);
+  delay(800);
+  
+//  
+  }
+}
+if(count1==1){
+  if(Serial.available()) 
+{
+ product = "";
+ count = 0; 
+
+ while(Serial.available() && count<=12)
+{
+ input = Serial.read();
+ Serial.print(input); 
+ product += input;
+ count++; 
+ delay(50);
+}
+
+
+
+if (product=="2B001589DA6D")
+{
+ productSantoo=="2B001589DA6D";
+ santo=125;
+ count1=2;
+
+ santoCost=26;
+ //a[30]="Santoor";
+ //Serial.println(" ");
+
+//Serial.print(santo);
+//t1.setText("Santoor");
+//n0.setValue(santoCost);
+t4.setText("Santoor");
+n8.setValue(santoCost);
+
+
+
+// 
+ 
+// lcd.clear();
+// 
+//
+v1++;
+totalWeight=santo+tooth+Biscuit+Rin;
+Total=santoCost+colgateCost+BiscuitCost+rinCost;
+
+ Serial.println(totalWeight);
+ Serial.println(Total);
+// n1.setValue(Total);
+ //delay(500);
+ n14.setValue(Total);
+ 
+
+//
+}
+//
+
+
+//
+if (product=="2B001585912A")
+{
+ tooth=175;
+ colgateCost=46;
+ count1=2;
+ Serial.println(" ");
+ Serial.println(" RIN ");
+
+ Serial.print(tooth);
+
+
+t4.setText("RIN");
+n8.setValue(colgateCost);
+
+
+
+ Serial.println(" ");
+
+//
+v2++;
+totalWeight=santo+tooth+Biscuit+Rin;
+Total=santoCost+colgateCost+BiscuitCost+rinCost;
+
+//
+  Serial.println(totalWeight);
+  Serial.println(Total);
+  //n1.setValue(Total);
+  n14.setValue(Total);
+  delay(800);
+//  
+}
+
+
+if (product=="2B00157394D9")
+{
+ Biscuit=150;
+  BiscuitCost=20;
+  count1=2;
+ Serial.println(" ");
+ Serial.println(" 50-50 Biscuit ");
+
+ Serial.println(" ");
+//
+t4.setText("50-50");
+//n0.setValue(BiscuitCost);
+//t5.setText("50-50");
+n8.setValue(BiscuitCost);
+v2++;
+totalWeight=santo+tooth+Biscuit+Rin;
+Total=santoCost+colgateCost+BiscuitCost+rinCost;
+
+//
+
+  Serial.println(totalWeight);
+  Serial.println(Total);
+  //n1.setValue(Total);
+  n14.setValue(Total);
+  delay(800);
+  }
+  if (product=="2B001587C178")
+{
+  Rin=175;
+  rinCost=80;
+  count1=2;
+Serial.println(" ");
+Serial.println(" Dairy milk ");
+
+ Serial.print(Rin);
+//t1.setText("Silk");
+//n0.setValue(rinCost);
+t4.setText("Silk");
+n8.setValue(rinCost);
+
+ Serial.println(" ");
+ 
+//
+v2++;
+totalWeight=santo+tooth+Biscuit+Rin;
+Total=santoCost+colgateCost+BiscuitCost+rinCost;
+
+  Serial.println(totalWeight);
+  Serial.println(Total);
+ // n1.setValue(Total);
+  n14.setValue(Total);
+  delay(800);
+  
+//  
+  }
+}
+}
+if(count1==2){
+   if(Serial.available()) 
+{
+ product = "";
+ count = 0; 
+
+ while(Serial.available() && count<=12)
+{
+ input = Serial.read();
+ Serial.print(input); 
+ product += input;
+ count++; 
+ delay(50);
+}
+
+
+
+if (product=="2B001589DA6D")
+{
+ productSantoo=="2B001589DA6D";
+ santo=125;
+ count1=3;
+
+ santoCost=26;
+ //a[30]="Santoor";
+ //Serial.println(" ");
+
+//Serial.print(santo);
+//t1.setText("Santoor");
+//n0.setValue(santoCost);
+t5.setText("Santoor");
+n9.setValue(santoCost);
+
+
+
+// 
+ 
+// lcd.clear();
+// 
+//
+v1++;
+totalWeight=santo+tooth+Biscuit+Rin;
+Total=santoCost+colgateCost+BiscuitCost+rinCost;
+
+ Serial.println(totalWeight);
+ Serial.println(Total);
+// n1.setValue(Total);
+ //delay(500);
+ n14.setValue(Total);
+ 
+
+//
+}
+//
+
+
+//
+if (product=="2B001585912A")
+{
+ tooth=175;
+ colgateCost=46;
+ count1=3;
+ Serial.println(" ");
+ Serial.println(" RIN ");
+
+ Serial.print(tooth);
+
+
+t5.setText("RIN");
+n9.setValue(colgateCost);
+
+
+
+ Serial.println(" ");
+
+//
+v2++;
+totalWeight=santo+tooth+Biscuit+Rin;
+Total=santoCost+colgateCost+BiscuitCost+rinCost;
+
+//
+  Serial.println(totalWeight);
+  Serial.println(Total);
+  //n1.setValue(Total);
+  n14.setValue(Total);
+  delay(800);
+//  
+}
+
+
+if (product=="2B00157394D9")
+{
+ Biscuit=150;
+  BiscuitCost=20;
+  count1=3;
+ Serial.println(" ");
+ Serial.println(" 50-50 Biscuit ");
+
+ Serial.println(" ");
+//
+t5.setText("50-50");
+//n0.setValue(BiscuitCost);
+//t5.setText("50-50");
+n9.setValue(BiscuitCost);
+v2++;
+totalWeight=santo+tooth+Biscuit+Rin;
+Total=santoCost+colgateCost+BiscuitCost+rinCost;
+
+//
+
+  Serial.println(totalWeight);
+  Serial.println(Total);
+  //n1.setValue(Total);
+  n14.setValue(Total);
+  delay(800);
+  }
+  if (product=="2B001587C178")
+{
+  Rin=175;
+  rinCost=80;
+  count1=3;
+Serial.println(" ");
+Serial.println(" Dairy milk ");
+
+ Serial.print(Rin);
+//t1.setText("Silk");
+//n0.setValue(rinCost);
+t5.setText("Silk");
+n9.setValue(rinCost);
+
+ Serial.println(" ");
+ 
+//
+v2++;
+totalWeight=santo+tooth+Biscuit+Rin;
+Total=santoCost+colgateCost+BiscuitCost+rinCost;
+
+  Serial.println(totalWeight);
+  Serial.println(Total);
+ // n1.setValue(Total);
+  n14.setValue(Total);
+  delay(800);
+  
+//  
+  }
+}
+}
+if(count1==3){
+   if(Serial.available()) 
+{
+ product = "";
+ count = 0; 
+
+ while(Serial.available() && count<=12)
+{
+ input = Serial.read();
+ Serial.print(input); 
+ product += input;
+ count++; 
+ delay(50);
+}
+
+
+
+if (product=="2B001589DA6D")
+{
+ productSantoo=="2B001589DA6D";
+ santo=125;
+ count1=0;
+
+ santoCost=26;
+ //a[30]="Santoor";
+ //Serial.println(" ");
+
+//Serial.print(santo);
+//t1.setText("Santoor");
+//n0.setValue(santoCost);
+t6.setText("Santoor");
+n10.setValue(santoCost);
+
+
+
+// 
+ 
+// lcd.clear();
+// 
+//
+v1++;
+totalWeight=santo+tooth+Biscuit+Rin;
+Total=santoCost+colgateCost+BiscuitCost+rinCost;
+
+ Serial.println(totalWeight);
+ Serial.println(Total);
+// n1.setValue(Total);
+ //delay(500);
+ n14.setValue(Total);
+ 
+
+//
+}
+//
+
+
+//
+if (product=="2B001585912A")
+{
+ tooth=175;
+ colgateCost=46;
+ count1=0;
+ Serial.println(" ");
+ Serial.println(" RIN ");
+
+ Serial.print(tooth);
+
+
+t6.setText("RIN");
+n10.setValue(colgateCost);
+
+
+
+ Serial.println(" ");
+
+//
+v2++;
+totalWeight=santo+tooth+Biscuit+Rin;
+Total=santoCost+colgateCost+BiscuitCost+rinCost;
+
+//
+  Serial.println(totalWeight);
+  Serial.println(Total);
+  //n1.setValue(Total);
+  n14.setValue(Total);
+  delay(800);
+//  
+}
+
+
+if (product=="2B00157394D9")
+{
+ Biscuit=150;
+  BiscuitCost=20;
+  count1=0;
+ Serial.println(" ");
+ Serial.println(" 50-50 Biscuit ");
+
+ Serial.println(" ");
+//
+t6.setText("50-50");
+//n0.setValue(BiscuitCost);
+//t5.setText("50-50");
+n10.setValue(BiscuitCost);
+v2++;
+totalWeight=santo+tooth+Biscuit+Rin;
+Total=santoCost+colgateCost+BiscuitCost+rinCost;
+
+//
+
+  Serial.println(totalWeight);
+  Serial.println(Total);
+  //n1.setValue(Total);
+  n14.setValue(Total);
+  delay(800);
+  }
+  if (product=="2B001587C178")
+{
+  Rin=175;
+  rinCost=80;
+  count1=0;
+Serial.println(" ");
+Serial.println(" Dairy milk ");
+
+ Serial.print(Rin);
+//t1.setText("Silk");
+//n0.setValue(rinCost);
+t6.setText("Silk");
+n10.setValue(rinCost);
+
+ Serial.println(" ");
+ 
+//
+v2++;
+totalWeight=santo+tooth+Biscuit+Rin;
+Total=santoCost+colgateCost+BiscuitCost+rinCost;
+
+  Serial.println(totalWeight);
+  Serial.println(Total);
+ // n1.setValue(Total);
+  n14.setValue(Total);
+  delay(800);
+  
+//  
+  }
+}
+}
+
+ if(Serial.available()) 
+{
+ product = "";
+ count = 0; 
+
+ while(Serial.available() && count<=12)
+{
+ input = Serial.read();
+ Serial.print(input); 
+ product += input;
+ count++; 
+ delay(50);
+}
+ if (product=="2B00155CFE9C")
+{
+ //productSantoo=="2B0015711D52";
+ 
+c0.Set_font_color_pco(63488);
+delay(500);
+c1.Set_font_color_pco(65535);
+delay(500);
+c2.Set_font_color_pco(65535);
+delay(500);
+  }
+  if (product=="2B0015711D52")
+{
+// productSantoo=="2B00157A2662";
+// 
+c1.Set_font_color_pco(63488);
+delay(500);
+c0.Set_font_color_pco(65535);
+delay(500);
+c2.Set_font_color_pco(65535);
+delay(500);
+
+  }
+  if (product=="2B00157A2662")
+{
+// productSantoo=="2B00157A2662";
+// 
+c2.Set_font_color_pco(63488);
+delay(500);
+c1.Set_font_color_pco(65535);
+delay(500);
+c0.Set_font_color_pco(65535);
+delay(500);
+
+  }
+}
+}
+
+
+//if(pin==1){
+//  //if(Serial.available()){
+//    product = "";
+// count = 0; 
+//
+// while(Serial.available() && count<=12)
+//{
+// input = Serial.read();
+// Serial.print(input); 
+// product += input;
+// count++; 
+// delay(50);
+//}
+//if (product=="2B00155CFE9C")
+//{
+// //productSantoo=="2B0015711D52";
+// 
+//c28.Set_background_color_bco(63488);
+//  }
+ // if (product=="2B00157A2662")
+//{
+// productSantoo=="2B00157A2662";
+// 
+//c18.Set_background_color_bco(63488);
+  //}
+//   if (product=="2B001589DA6D")
+//{
+// productSantoo=="2B001589DA6D";
+// 
+//c5.Set_background_color_bco(63488);
+//  }
+  
+
+
+
+
+
+/*
+ * Button bOff component pop callback function. 
+ * When the OFF button is released, the LED turns off and the state text changes. 
+ */
+//void bOffPopCallback(void *ptr) {
+  //tState.setText("State: off");
+  //digitalWrite(led1, LOW);
+//}
+
+/*
+ * Slider h0 component pop callback function. 
+ * When the slider is released, the LED brightness changes and the slider text changes. 
+ */
+
+
+/*
+ * Button bUpdate component pop callback function. 
+ * When the UPDATE button is released, the temperature and humidity readings are updated. 
+ */
+
+
+
+
+
+
+
+void setup(void) {    
+ 
+  Serial.begin(9600);
+
+  pinMode(7,INPUT);
+  
+  pinMode(2,INPUT);
+pinMode(3,INPUT);
+v1=0;
+
+v2=0;
+    
+  // You might need to change NexConfig.h file in your ITEADLIB_Arduino_Nextion folder
+  // Set the baudrate which is for debug and communicate with Nextion screen
+  nexInit();
+
+  // Register the pop event callback function of the components
+ // start.attachPop(startPopCallback, &start);
+ // b1.attachPop(b1PopCallback, &b1);
+  //h0.attachPop(h0PopCallback);
+  //bUpdate.attachPop(bUpdatePopCallback, &bUpdate);
+    
+  // Set LEDs as outputs
+  pinMode(led1, OUTPUT);
+  pinMode(led2, OUTPUT);
+}
+
+void loop(void) {   
+  /*
+   * When a pop or push event occured every time,
+   * the corresponding component[right page id and component id] in touch event list will be asked.
+   */
+   Rfid();
+ //  navigation();
+  nexLoop(nex_listen_list);
+}
+
